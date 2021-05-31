@@ -1,0 +1,22 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  database:
+    image: healthcheck/mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "1234"
+      MYSQL_DATABASE: "BackendReservasDatabase"
+    ports:
+      - "3306:3306"
+  backendreservasapi:
+    image: backendreservasapi
+    build:
+      context: .
+      dockerfile: BackendReservas.Api/Dockerfile
+    ports:
+      - 5000:5000
+    depends_on: 
+      database:
+        condition: service_healthy
