@@ -25,7 +25,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ~/.vsdbg:/remote_debugger:rw
-    depends_on: 
+    depends_on:
       database:
         condition: service_healthy
-    
+
